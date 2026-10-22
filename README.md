@@ -1,7 +1,9 @@
 # 复现包（投稿69·Civ-OS 实测部分）
 
 一键校验：`cd 复现包 && python3 scripts/verify.py`
-→ 期望输出：**53 项 PASS、0 FAIL**（重算全部关键数字并与存档值逐项比对）。
+→ 期望输出：**80 项 PASS、0 FAIL**（重算全部关键数字并与存档值逐项比对）。
+
+![verify](https://github.com/19930225-yuan/civ-os-reproduction/actions/workflows/verify.yml/badge.svg)
 
 ## 目录结构
 
@@ -20,7 +22,7 @@
 │   ├── abm2_ladder.py        E.20 机制阶梯（U 型阈值：耦合 ≥0.7，seed=20261018）
 │   └── gss_correction.py     GSS 编码勘误说明（study15b/16b 的映射规则）
 │   └── edit*.py / revertA.py / verify6.py   论文修订脚本（跟踪修订）
-├── data/             结果数据（study1-21 共 25 个 CSV，含勘误后 15b/16b/18b）
+├── data/             结果数据（study1-31 共 38 个 CSV：含勘误后 15b/16b/18b、study22-30 对照系列、study31 判定层重编码审计表）
 │   ├── study15b_GSS修正趋势.csv / study16b_GSS代际传递矩阵_修正.csv   ★GSS 编码勘误后版本
 │   └── study18b_机制阶梯.csv                                          ★E.20 机制阶梯（U 型阈值）
 └── results/          （verify.py 输出即结果快照）
@@ -59,12 +61,14 @@ raw.githubusercontent.com、huggingface.co、wikimedia、ctext 在部分网络�
 
 ## verify.py 保证什么、不保证什么
 
-**保证**：脚本→结果的计算链一致（28 项关键数字全部可重算复现）；
+**保证**：脚本→结果的计算链一致（80 项关键数字全部可重算复现）；
 **不保证**：数据→事实的正确性（案例编码、事实卡仍含研究者判断）——这正是论文 §8.1/E.12 承认并以人际盲评补强的部分。
 
 ---
 
-## 发布三步（OSF + GitHub）
+## 发布状态与三步（GitHub + Zenodo）
+
+**已发布**：GitHub 仓库 github.com/19930225-yuan/civ-os-reproduction（CI 自动重跑）＋ Zenodo 双 DOI（10.5281/zenodo.23466926 复现包、10.5281/zenodo.23520081 补充材料，CC BY 4.0）。以下步骤供重传/复核时使用。
 
 **约定：GitHub 仓库根 = 本目录（复现包/）的内容。**
 
@@ -74,16 +78,16 @@ raw.githubusercontent.com、huggingface.co、wikimedia、ctext 在部分网络�
 3. 推送后 Actions 自动运行 verify.py → 通过则显示绿勾 ✅；
 4. README 顶部加徽章：`![verify](https://github.com/<用户名>/<仓库名>/actions/workflows/verify.yml/badge.svg)`
 
-### ② OSF（DOI 存证，10 分钟）
+### ② Zenodo（DOI 存证）——已存证，如需新版本：上传新 zip 后发布 New Version，DOI 不变
 1. osf.io 注册（可用 ORCID）→ Create Project；
 2. 上传 `复现包.zip`（或分文件夹）；
 3. **必须做**：Create → Registration（冻结快照）→ 得到 DOI；
 4. 论文数据可用性声明写：*"All data, code, and verification materials are archived at OSF (DOI: 10.17605/OSF.IO/XXXXX); the verification suite is continuously re-run in CI (GitHub Actions, green badge)."*
 
 ### ③ 论文里怎么写（模板）
-> **数据与代码可用性声明**：本研究全部数据（含原始数据获取脚本与校验和）、分析脚本及一键复现校验套件（verify.py，28 项断言）已存档于 OSF（DOI）。校验套件在持续集成环境中自动重跑，状态徽章见代码仓库。Seshat、D-PLACE、Kanripo、CBDB 数据的使用遵循各自许可协议（CBDB 数据经官方 SHA256 校验）。
+> **数据与代码可用性声明**：本研究全部数据（含原始数据获取脚本与校验和）、分析脚本及一键复现校验套件（verify.py，80 项断言）已存档于 Zenodo（复现包 DOI: 10.5281/zenodo.23466926；补充材料 DOI: 10.5281/zenodo.23520081）。校验套件在持续集成环境中自动重跑（GitHub Actions，仓库 github.com/19930225-yuan/civ-os-reproduction，状态徽章见 README 顶部）。Seshat、D-PLACE、Kanripo、CBDB 数据的使用遵循各自许可协议（CBDB 数据经官方 SHA256 校验）。
 
 ### 审稿人会怎么验
-1. 下载 OSF 包 → `python3 scripts/verify.py` → 28 项 PASS（约 2 分钟）；
+1. 下载复现包（GitHub 或 Zenodo 10.5281/zenodo.23466926）→ `python3 scripts/verify.py` → 80 项 PASS（约 2 分钟）；
 2. 看 GitHub 徽章 → 绿勾（代码没有"只在作者机器上能跑"问题）；
 3. 想深挖 → scripts/ 里每个实测有独立脚本，data/ 有中间数据。

@@ -1,0 +1,22 @@
+﻿unit_1941,side,border_pair,m_share_1941,m_share_post,d_m,hs_share_1941,hs_share_post,d_hs,note
+Gurdaspur,India,True,51.14,1.2,-49.94,40.41,90.38,49.97,2011普查含Pathankot
+Amritsar,India,True,46.52,0.45,-46.07,49.9,97.32,47.41,Tarn Taran 2006 析出，2011 普查在析出前
+Ferozepur,India,True,45.07,0.34,-44.73,48.89,98.43,49.54,2011 普查含 Fazilka（析出前）；不含 Moga/Muktsar（1941 属本县部分乡，近似）
+Jullundur,India,False,45.23,1.31,-43.92,40.39,96.57,56.17,Kapurthala 1948、SBSN 1995 析出
+Hoshiarpur,India,False,32.53,1.46,-31.07,52.3,96.99,44.69,近似一致
+Ludhiana,India,False,36.95,2.3,-34.65,54.66,96.27,41.62,Fatehgarh Sahib 1992 析出
+Lahore,Pakistan,True,60.62,95.12,34.5,33.19,0.02,-33.17,Kasur 1941 为 Lahore 之乡，1976 析出
+Sialkot,Pakistan,True,62.09,96.46,34.36,25.65,0.06,-25.59,Narowal 1991 析出
+Sheikhupura,Pakistan,True,63.62,96.27,32.65,26.68,0.01,-26.67,Nankana Sahib 1994 析出
+Gujranwala,Pakistan,False,70.45,96.81,26.36,21.9,0.01,-21.89,Hafizabad 1991 析出
+Gujrat,Pakistan,False,85.58,99.26,13.68,13.6,0.01,-13.59,Mandi Bahuddin 1993 析出
+Jhelum,Pakistan,False,89.42,98.92,9.5,10.29,0.03,-10.26,近似一致
+Rawalpindi,Pakistan,False,80.0,98.01,18.01,18.13,0.02,-18.11,Chakwal 1985 析出，未并入（近似）
+Attock,Pakistan,False,90.42,99.51,9.09,9.22,0.03,-9.19,近似一致
+Mianwali,Pakistan,False,86.16,99.3,13.13,13.56,0.0,-13.56,Khushab 1994 析出
+Montgomery (Sahiwal),Pakistan,False,69.11,98.06,28.95,25.77,0.01,-25.77,Okara 1976 析出（近似）
+Lyallpur (Faisalabad),Pakistan,False,62.85,96.49,33.65,28.53,0.01,-28.52,TTS 1990 析出未并（近似）
+Jhang,Pakistan,False,82.61,98.29,15.69,17.06,0.01,-17.06,Chiniot 1993 析出
+Multan,Pakistan,False,78.01,99.05,21.04,19.33,0.03,-19.31,Khanewal/Vehari 1976 析出（近似）
+Muzaffargarh,Pakistan,False,86.42,99.65,13.23,13.16,0.02,-13.14,Layyah 1982 析出（近似）
+Dera Ghazi Khan,Pakistan,False,88.19,99.89,11.7,11.6,0.03,-11.56,Rajanpur 1982 析出

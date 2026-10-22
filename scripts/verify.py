@@ -171,6 +171,77 @@ sup21 = sum(1 for r in s21 if "支持" in r["判定"])
 check("强化判定含'支持'数", sup21 >= 4, True, tol=0)
 
 
+
+print("== 15. GSS 信仰层趋势（study15c，GOD 定审）==")
+s15c = load("study15c_GSS信仰层趋势_GOD定审.csv")
+got = {int(r["year"]): r for r in s15c}
+check("god 2000 信神(%)", float(got[2000]["信神%(≥5,有效)"]), 82.3, tol=0.05)
+check("god 2022 信神(%)", float(got[2022]["信神%(≥5,有效)"]), 66.3, tol=0.05)
+check("god 2022 确信(%)", float(got[2022]["确信%(=6,有效)"]), 50.2, tol=0.05)
+sl, _, _, pg, _ = stats.linregress([2000, 2010, 2018, 2022], [float(got[y]["信神%(≥5,有效)"]) for y in [2000, 2010, 2018, 2022]])
+check("信神斜率(/年)", round(sl, 3), -0.672, tol=0.005)
+check("1972 god 缺失", got[1972]["god_N"], 0)
+
+
+
+print("== 16. 四形态重编码与跨国tau（study22/23）==")
+s22 = load("study22_四形态重编码与唤醒测试.csv")
+check("study22 N", len(s22), 14)
+check("边界/复合标记数", sum(1 for r in s22 if r["边界标记"]), 9)
+wake = [(r["形态"].split("(")[0].split(":")[0], r["唤醒类型"]) for r in s22]
+check("核亡仅外部", all("外部" in w for f, w in wake if f == "核亡"), True, tol=0)
+check("核续无唤醒事件", all("未断" in w for f, w in wake if f.startswith("核续")), True, tol=0)
+s23 = load("study23_跨国tau三角验证_Pew2024.csv")
+check("study23 N", len(s23), 7)
+
+
+
+print("== 17. 核续衰减两段律（study24）==")
+s24 = load("study24_核续衰减律_分治容器面板.csv")
+m = {r["序列"]: r for r in s24}
+check("印度穆斯林速率(%)", float(m["印度-穆斯林占比"]["年均相对速率(%)"]), 0.61, tol=0.01)
+check("孟加拉印度教速率(%)", float(m["孟加拉-印度教徒占比"]["年均相对速率(%)"]), -1.30, tol=0.01)
+check("巴基斯坦平台", m["巴基斯坦-印度教徒占比"]["半衰期(年)"], "平台", tol=0)
+check("孟加拉半衰期(年)", int(m["孟加拉-印度教徒占比"]["半衰期(年)"]), 53, tol=1)
+
+
+
+print("== 18. 同化效率对称对照（study25）==")
+s25 = load("study25_同化效率对称对照.csv")
+check("study25 N", len(s25), 5)
+check("历史方向性条目", sum(1 for r in s25 if any("支持推论A" in v for v in r.values())), 1)
+
+
+
+print("== 19. 征服者吸收与辐射模式（study26/27）==")
+s26 = load("study26_征服者吸收对照.csv")
+weak = [r for r in s26 if r["锚定态"].startswith("弱")]
+check("study26 N", len(s26), 12)
+check("弱锚被吸收/换核", sum(1 for r in weak if "吸收" in r["判定"] or "换核" in r["判定"]), 11)
+check("满锚免疫", sum(1 for r in s26 if r["锚定态"].startswith("满") and r["判定"] == "免疫"), 1)
+s27 = load("study27_辐射模式对照.csv")
+check("study27 N", len(s27), 5)
+
+
+
+print("== 20. 拉德克利夫边界配对（study28/crosswalk）==")
+s28 = {r["检验"]: r for r in load("study28_拉德克利夫边界配对分析.csv")}
+check("配对背离均值(pp)", float(s28["贴边配对背离"]["值"]), -80.8, tol=0.1)
+check("侧效应MW p", float(s28["侧效应-MW"]["值"]), 3.69e-05, tol=1e-6)
+check("crosswalk N", len(load("crosswalk_radcliffe.csv")), 21)
+
+
+
+print("== 21. 散居对照与份额核对（study29/30）==")
+s29 = load("study29_东南亚华裔份额核对.csv")
+check("study29 N", len(s29), 10)
+mal = [r for r in s29 if "马来西亚-华裔" in r["对象"]]
+check("马来西亚1957值", any("37.7" in r["份额"] for r in mal), True, tol=0)
+s30 = load("study30_散居三群体对照.csv")
+check("study30 N", len(s30), 19)
+check("犹太分层条目", sum(1 for r in s30 if "正统" in r["群体"]), 2)
+
+
 n_fail = sum(1 for *_, ok in checks if not ok)
 print(f"\n{'='*40}\n总计 {len(checks)} 项 | PASS {len(checks)-n_fail} | FAIL {n_fail}")
 print(">>> 全部结果可复现 ✓" if n_fail == 0 else ">>> 存在不一致 ✗（请核对数据与脚本版本）")
